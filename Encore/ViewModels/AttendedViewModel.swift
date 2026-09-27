@@ -8,6 +8,7 @@
 // This is for the attended screen
 
 import Foundation
+import SwiftData
 
 @Observable //So swift tracks changes
 final class AttendedViewModel {
@@ -20,5 +21,9 @@ final class AttendedViewModel {
         return attended.filter {
             $0.arsistName.localizedCaseInsensitiveContains(searchText) || $0.venueName.localizedCaseInsensitiveContains(searchText) || $0.city.localizedCaseInsensitiveContains(searchText)
         }
+    }
+    
+    func delete(_ show: Show, context: ModelContext) {
+        context.delete(show)
     }
 }
