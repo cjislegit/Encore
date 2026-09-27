@@ -44,6 +44,8 @@ struct AttendedView: View {
                     //Inserts the new Show to the modelContext
                     viewModel.showingAddSheet = true
                 }
+            } .sheet(isPresented: $vm.showingAddSheet) {
+                AddEditShowView()
             }
         }
     }
