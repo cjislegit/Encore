@@ -25,7 +25,9 @@ struct AttendedView: View {
                 } else {
                     List {
                         ForEach(viewModel.filteredShows(allShows)) { show in
-                            Text(show.arsistName)
+                            NavigationLink(value: show) {
+                                ShowRowView(show: show)
+                            }
                         }
                         .onDelete { indexSet in
                             let shows = viewModel.filteredShows(allShows)
@@ -39,6 +41,9 @@ struct AttendedView: View {
             }
             .navigationTitle("Attended")
             .searchable(text: $vm.searchText, prompt: "Artists, Venus, Cities")
+            .navigationDestination(for: Show.self) { show in
+                //ShowDetailView
+            }
             .toolbar{
                 Button("Add Show!", systemImage: "plus") {
                     //Inserts the new Show to the modelContext
