@@ -11,7 +11,7 @@ struct ShowRowView: View {
     let show: Show
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(show.arsistName)
+            Text(show.artistName)
                 .font(.headline)
             
             HStack(spacing: 4) {
@@ -43,5 +43,5 @@ struct ShowRowView: View {
 }
 
 #Preview {
-    ShowRowView(show: Show(arsistName: "MCR", venueName: "Hollywood Bowl", city: "Hollywood", date: .now, status: .attended))
+    ShowRowView(show: Show(artistName: "MCR", venueName: "Hollywood Bowl", city: "Hollywood", date: .now, status: .attended))
 }

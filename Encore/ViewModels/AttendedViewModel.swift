@@ -19,7 +19,7 @@ final class AttendedViewModel {
         let attended = shows.filter({ $0.status == .attended })
         guard !searchText.isEmpty else { return attended}
         return attended.filter {
-            $0.arsistName.localizedCaseInsensitiveContains(searchText) || $0.venueName.localizedCaseInsensitiveContains(searchText) || $0.city.localizedCaseInsensitiveContains(searchText)
+            $0.artistName.localizedCaseInsensitiveContains(searchText) || $0.venueName.localizedCaseInsensitiveContains(searchText) || $0.city.localizedCaseInsensitiveContains(searchText)
         }
     }
     

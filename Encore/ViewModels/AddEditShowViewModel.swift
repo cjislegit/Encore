@@ -27,7 +27,7 @@ final class AddEditShowViewModel {
     
     init(show: Show? = nil, initialStatus: ShowStatus = .upcoming) {
         if let show {
-            artistName = show.arsistName
+            artistName = show.artistName
             venueName = show.venueName
             city = show.city
             date = show.date
@@ -50,7 +50,7 @@ final class AddEditShowViewModel {
     
     func save(to context: ModelContext, existing show: Show? = nil) {
         if let show {
-            show.arsistName = artistName
+            show.artistName = artistName
             show.venueName = venueName
             show.city = city
             show.date = date
@@ -59,7 +59,7 @@ final class AddEditShowViewModel {
             show.notes = notes.isEmpty ? nil : notes
             show.setlist = setlist
         } else {
-            let newShow = Show(arsistName: artistName, venueName: venueName, city: city, date: date, status: status)
+            let newShow = Show(artistName: artistName, venueName: venueName, city: city, date: date, status: status)
             newShow.rating = rating > 0 ? rating : nil
             newShow.notes = notes.isEmpty ? nil : notes
             newShow.setlist = setlist

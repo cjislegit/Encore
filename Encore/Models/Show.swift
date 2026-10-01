@@ -19,7 +19,8 @@ enum ShowStatus: String, Codable, CaseIterable {
 
 @Model
 final class Show {
-    var arsistName: String
+    @Attribute(originalName: "arsistName")
+    var artistName: String
     var venueName: String
     var city: String
     var date: Date
@@ -30,8 +31,8 @@ final class Show {
     var setlist: [String]
     var createdAt: Date
     
-    init(arsistName: String, venueName: String, city: String, date: Date, status: ShowStatus) {
-        self.arsistName = arsistName
+    init(artistName: String, venueName: String, city: String, date: Date, status: ShowStatus) {
+        self.artistName = artistName
         self.venueName = venueName
         self.city = city
         self.date = date
