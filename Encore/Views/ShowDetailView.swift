@@ -24,6 +24,12 @@ struct ShowDetailView: View {
                 LabeledContent("Date", value: show.date.formatted(date: .long, time: .omitted))
                 LabeledContent("Status", value: show.status.rawValue.capitalized)
             }
+            if show.status == .attended {
+                Section("Rating") {
+                    StarRatingView(rating: Binding(get: { show.rating ?? 0}, set: { show.rating = $0 > 0 ? $0 : nil}))
+                        .padding(.vertical, 4)
+                }
+            }
         }
     }
 }

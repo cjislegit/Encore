@@ -20,7 +20,12 @@ struct StarRatingView: View {
                 }
                 label : {
                     Image(systemName: star <= rating ? "star.fill" : "star")
+                        .font(.title2)
+                        .foregroundStyle(star <= rating ? Color.yellow : Color.secondary)
+                        .scaleEffect(star <= rating ? 1.1 : 1.0)
+                        .animation(.spring(response: 0.5), value: rating)
                 }
+                .buttonStyle(.plain)
             }
         }
     }
