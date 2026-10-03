@@ -30,6 +30,27 @@ struct ShowDetailView: View {
                         .padding(.vertical, 4)
                 }
             }
+            
+            Section("Notes") {
+                if let notes = show.notes,
+                   !notes.isEmpty {
+                    Text(notes)
+                } else {
+                    Text("No notes added!")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            
+            Section("Setlist") {
+                if show.setlist.isEmpty {
+                    Text("No Songs Added")
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(show.setlist.indices, id: \.self) { index in
+                        HStack {}
+                    }
+                }
+            }
         }
     }
 }
