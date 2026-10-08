@@ -47,10 +47,61 @@ struct ShowDetailView: View {
                         .foregroundStyle(.secondary)
                 } else {
                     ForEach(show.setlist.indices, id: \.self) { index in
-                        HStack {}
+                        HStack {
+                            Text("\(index + 1)")
+                                .foregroundStyle(.secondary)
+                                .frame(width: 28, alignment: .leading)
+                            Text(show.setlist[index])
+                        }
+                    }
+                    .onDelete { indexSet in
+                        show.setlist.remove(atOffsets: indexSet)
+                    }
+                    .onMove { source, destination in
+                        show.setlist.move(fromOffsets: source, toOffset: destination)
                     }
                 }
+                HStack {
+                    TextField("Add song", text: $newSetlistEntry)
+                    Button("Add") {
+                        let trimmed = newSetlistEntry.trimmingCharacters(in: .whitespaces)
+                        guard !trimmed.isEmpty else {
+                            return
+                        }
+                        show.setlist.append(trimmed)
+                        newSetlistEntry = ""
+                    }
+                    .disabled(newSetlistEntry.trimmingCharacters(in: .whitespaces).isEmpty)
+                }
             }
+        }
+        
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Button("Edit Show") {
+                        showingEditSheet = true
+                    }
+                    Divider()
+                    Button("Delete Show", role: .destructive) {
+                        showDeleteAlert = true
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $showingEditSheet) {
+            AddEditShowView(show: show)
+        }
+        .alert("Delete Show?", isPresented: $showDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                modelContext.delete(show)
+                dismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will permanetly remove \(show.artistName) from your history.")
         }
     }
 }
